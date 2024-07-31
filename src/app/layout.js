@@ -11,6 +11,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+          rel="stylesheet"
+        />
+        <title>{metadata.title}</title>
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
