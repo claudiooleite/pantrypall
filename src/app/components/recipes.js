@@ -1,20 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-// website credentials
+// Website credentials
 const KEY = "974f7f2b0bd545bbbd319a94fac1a359";
 const APP_ID = "968644ec";
 const URL = "https://api.edamam.com/api/recipes/v2";
 
-// test word - to change to active search
-// const searchTest = "chicken";
-// const urlConcat = `${URL}?type=public&q=${searchTest}&app_id=${APP_ID}&app_key=${KEY}`;
-
 function Recipes({ pantry }) {
   const [recipes, setRecipes] = useState([]);
 
-  const pantryItems = pantry.map((item) => item.item).join(" ");
-  // render updated items and correspondent recipes
+  const pantryItems = pantry.map((item) => item.name).join(" ");
+
+  // Fetch recipes when pantry items change
   useEffect(() => {
     if (pantryItems) {
       getRecipes();
@@ -30,6 +27,7 @@ function Recipes({ pantry }) {
       .then((response) => setRecipes(response.data.hits))
       .catch((error) => console.error(error));
   }
+
   return (
     <>
       <h1>Recipes</h1>
