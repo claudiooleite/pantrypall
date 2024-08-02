@@ -6,7 +6,7 @@ import IngredientsInfo from "./components/ingredientsInfo";
 import IngredientForm from "./components/ingredientsForm";
 
 export default function Home() {
-  const [pantry, setPantry] = useState([]);
+  const [pantry, setPantry] = useState([]); //manages state of ingredients in the pantry
 
   const handleAddIngredient = (ingredientName) => {
     setPantry([...pantry, { id: Date.now(), name: ingredientName }]);
