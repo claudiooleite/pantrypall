@@ -34,12 +34,16 @@ function Recipes({ pantry }) {
 
   return (
     <>
-      <h1>Recipes</h1>
+      <h1 className="text-xl font-semibold my-4">Recipes</h1>
       <ul>
         {recipes.slice(0, 4).map((recipe, index) => (
           <>
             <li key={index}>
-              <RecipeCard image={recipe.recipe.image} label={recipe.recipe.label} />
+              <RecipeCard
+                image={recipe.recipe.image}
+                label={recipe.recipe.label}
+                mealType={recipe.recipe.mealType}
+              />
             </li>
           </>
         ))}

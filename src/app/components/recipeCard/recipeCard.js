@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-function RecipeCard({ label, image }) {
+function RecipeCard({ label, image, mealType }) {
   return (
     <>
-      <div class="relative border-2 border-neutral-950 rounded-xl w-120 h-60">
+      <div class="relative border-2 border-neutral-950 rounded-xl w-60 h-32">
         <Image
           className="rounded-xl object-cover "
           src={image}
@@ -12,6 +12,7 @@ function RecipeCard({ label, image }) {
         />
       </div>
       <h5 class="">{label}</h5>
+      <h5 class="">{mealType}</h5>
     </>
   );
 }
