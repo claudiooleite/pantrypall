@@ -4,6 +4,7 @@ import { useState } from "react";
 import Recipes from "./components/recipes";
 import IngredientsInfo from "./components/ingredientsInfo";
 import IngredientForm from "./components/ingredientsForm";
+import Navbar from "./components/navbar";
 
 export default function Home() {
   const [pantry, setPantry] = useState([]); //manages state of ingredients in the pantry
@@ -22,6 +23,7 @@ export default function Home() {
       <IngredientForm onAddIngredient={handleAddIngredient} />
       <IngredientsInfo ingredients={pantry} onRemove={handleRemove} />
       <Recipes pantry={pantry} />
+      <Navbar />
     </main>
   );
 }
