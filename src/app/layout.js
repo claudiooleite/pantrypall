@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/navbar";
+import { PantryProvider } from "./utilities/PantryContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,10 @@ export default function RootLayout({ children }) {
         />
         <title>{metadata.title}</title>
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <PantryProvider>{children}</PantryProvider>
+        <Navbar />
+      </body>
     </html>
   );
 }
