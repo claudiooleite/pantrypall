@@ -66,6 +66,7 @@ const Favorites = () => {
               label={recipe.recipe.label}
               mealType={recipe.recipe.mealType}
               calories={Math.round(recipe.recipe.calories)}
+              id={recipe.recipe.id}
             />
           ))}
         </div>
