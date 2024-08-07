@@ -1,20 +1,24 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-function RecipeCard({ label, image, mealType }) {
+const RecipeCard = ({ image, label, mealType, calories }) => {
   return (
-    <>
-      <div class="relative border-2 border-neutral-950 rounded-xl w-60 h-32">
+    <div className="m-2 p-2 rounded-lg w-72 flex flex-col items-center bg-white border-2 border-gray-300 shadow-md">
+      <div className="relative w-full h-40 border-2 border-neutral-950 rounded-lg overflow-hidden">
         <Image
-          className="rounded-xl object-cover "
           src={image}
-          alt="card-image"
-          fill
+          alt={label}
+          layout="fill"
+          objectFit="cover"
+          className="rounded-lg"
         />
       </div>
-      <h5 class="">{label}</h5>
-      <h5 class="">{mealType}</h5>
-    </>
+      <div className="p-2 text-center">
+        <h2 className="text-lg font-semibold mb-1">{label}</h2>
+        <p className="text-sm text-gray-600 capitalize">{mealType}</p>
+        <p className="text-sm text-gray-800 mt-1">Calories: {calories}</p>
+      </div>
+    </div>
   );
-}
+};
 
 export default RecipeCard;
