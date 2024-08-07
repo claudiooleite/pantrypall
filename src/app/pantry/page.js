@@ -1,8 +1,8 @@
 "use client";
 
 import { usePantry } from "../utilities/PantryContext";
-import IngredientsInfo from "../components/ingredientsInfo";
-import IngredientForm from "../components/ingredientsForm";
+import IngredientsInfo from "../components/IngredientsInfo";
+import IngredientForm from "../components/IngredientsForm";
 
 export default function Pantry() {
   const { pantry, addIngredient, removeIngredient } = usePantry();

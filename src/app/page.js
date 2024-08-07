@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Recipes from "./components/recipes";
-import IngredientsInfo from "./components/ingredientsInfo";
-import IngredientForm from "./components/ingredientsForm";
+import Recipes from "./components/Recipes";
+import IngredientsInfo from "./components/IngredientsInfo";
+import IngredientForm from "./components/IngredientsForm";
 
 export default function Home() {
   const [pantry, setPantry] = useState([]); //manages state of ingredients in the pantry
@@ -18,10 +18,9 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center">
-      {console.log("Pantry:", pantry)}
-      <IngredientForm onAddIngredient={handleAddIngredient} />
-      <IngredientsInfo ingredients={pantry} onRemove={handleRemove} />
-      <Recipes pantry={pantry} />
+      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+        <h1 className="text-lg font-semibold">Welcome</h1>
+      </div>
     </main>
   );
 }

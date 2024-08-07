@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, useContext, useState } from "react";
 
@@ -10,7 +10,15 @@ export const usePantry = () => {
 
 // Create the Pantry provider component
 export const PantryProvider = ({ children }) => {
-  const [pantry, setPantry] = useState([]);
+  // Initial pantry items for development
+  const initialPantry = [
+    { id: 1, name: "tomato" },
+    { id: 2, name: "onion" },
+    { id: 3, name: "garlic" },
+    { id: 4, name: "olive oil" },
+  ];
+
+  const [pantry, setPantry] = useState([...initialPantry]);
 
   const addIngredient = (name) => {
     setPantry((prevPantry) => [
