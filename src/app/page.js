@@ -39,14 +39,14 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center pb-20">
-      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
-        <h1 className="text-lg font-semibold">Welcome to Your Recipe App</h1>
+      <div className="bg-orange-300 w-full h-52 p-4 justify-center flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+        <h1 className="text-2xl font-extrabold">Welcome to Pantry Pall</h1>
       </div>
-      <div className="p-4 w-full flex flex-col items-center">
-        <h2 className="text-xl font-semibold mb-4">
+      <div className="p-4 w-full flex flex-col -m-24 items-center">
+        <h2 className="text-xl font-semibold -mb-2">
           Recommended Meals for Today
         </h2>
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center mb-16">
           {recipes.slice(0, 4).map((recipe, index) => (
             <RecipeCard
               key={index}

@@ -47,49 +47,58 @@ const RecipeDetailPage = ({ params }) => {
   const calories = recipe.calories ? Math.round(recipe.calories) : "N/A"; // Handle undefined calories
 
   return (
-    <div className="min-h-screen flex flex-col items-center pb-20 p-4">
-      <div className="relative w-full h-80 border-2 border-neutral-950 rounded-lg overflow-hidden mb-4">
+    <>
+      <div className="relative w-full h-80 ">
         <Image
           src={recipe.image}
           alt={recipe.label}
           fill
           style={{ objectFit: "cover" }}
-          className="rounded-lg"
         />
       </div>
-      <h1 className="text-3xl font-bold mb-4">{recipe.label}</h1>
-      <p className="text-lg mb-4">Total Time: {recipe.totalTime} minutes</p>
-      <div className="w-full max-w-4xl">
-        <h2 className="text-xl font-semibold mb-2">Ingredients:</h2>
-        <ul className="list-disc list-inside pl-4 mb-4">
-          {recipe.ingredientLines.map((ingredient, index) => (
-            <li key={index} className="text-sm text-gray-700">
-              {ingredient}
-            </li>
-          ))}
-        </ul>
-        <h2 className="text-xl font-semibold mb-2">Preparation Steps:</h2>
-        {recipe.url ? (
-          <a
-            href={recipe.url} // Use the instructions URL
-            target="_blank" // Open in a new tab
-            rel="noopener noreferrer" // Security measure for external links
-            className="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            View Full Instructions
-          </a>
-        ) : (
-          <p>No instructions available.</p>
-        )}
+      <div className="min-h-screen flex flex-col items-center pb-20 p-4 relative -mt-20">
+        <h1 className="text-2xl text-center p-1 font-bold bg-orange-300  m-4 border-2 border-neutral-950 rounded-xl ">
+          {recipe.label}
+        </h1>
+        <p className="text-lg mb-4 p-1  border-2 border-neutral-950 rounded-xl ">
+          Total Time: {recipe.totalTime} minutes
+        </p>
+        <div className="w-full max-w-4xl">
+          <h2 className="text-xl font-semibold mb-2">Ingredients:</h2>
+          <ul className="list-inside p-4 mb-4 border-2 border-neutral-950 rounded-xl">
+            {recipe.ingredientLines.map((ingredient, index) => (
+              <li
+                key={index}
+                className="text-sm text-gray-700 pt-1 border-b-2 border-b-zinc-600 ">
+                {ingredient}
+              </li>
+            ))}
+          </ul>
+          <h2 className="text-xl font-semibold mb-2">Preparation Steps:</h2>
+          {recipe.url ? (
+            <a
+              href={recipe.url} // Use the instructions URL
+              target="_blank" // Open in a new tab
+              rel="noopener noreferrer" // Security measure for external links
+              className="inline-block my-2 px-4 py-2 bg-orange-300 rounded-md hover:bg-blue-600">
+              View Full Instructions
+            </a>
+          ) : (
+            <p>No instructions available.</p>
+          )}
 
-        <h2 className="text-xl font-semibold mb-2">Nutritional Information:</h2>
-        <ul className="text-sm text-gray-700 mb-4">
-          <li>Calories: {calories} kcal</li>
-          <li>Protein: {protein || "N/A"} g</li>
-          <li>Fat: {fat || "N/A"} g</li>
-          <li>Carbs: {carbs || "N/A"} g</li>
-        </ul>
+          <h2 className="text-xl font-semibold mb-2">
+            Nutritional Information:
+          </h2>
+          <ul className="text-sm text-gray-700 mb-4">
+            <li className="border-b-2 border-b-zinc-600">Calories: {calories} kcal</li>
+            <li className="border-b-2 border-b-zinc-600">Protein: {protein || "N/A"} g</li>
+            <li className="border-b-2 border-b-zinc-600">Fat: {fat || "N/A"} g</li>
+            <li className="border-b-2 border-b-zinc-600">Carbs: {carbs || "N/A"} g</li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
