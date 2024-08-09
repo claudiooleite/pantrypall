@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar";
+import Navbar from "@/components/Navbar";
 
 export default function SearchLayout({
   children, // will be a page or nested layout

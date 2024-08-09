@@ -1,7 +1,7 @@
 "use client";
 
 import { usePantry } from "../utilities/PantryContext";
-import Recipes from "../components/Recipes";
+import Recipes from "@/components/Recipes";
 import { useState } from "react";
 
 export default function Search() {

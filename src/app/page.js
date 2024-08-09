@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import RecipeCard from "./components/recipeCard/RecipeCard";
+import RecipeCard from "@/components/recipeCard/RecipeCard";
 
 // API credentials
 const API_KEY = "974f7f2b0bd545bbbd319a94fac1a359";

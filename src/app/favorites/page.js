@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
-import RecipeCard from "../components/recipeCard/RecipeCard";
+import RecipeCard from "@/components/recipeCard/RecipeCard";
 
 // Diet labels
 const dietLabels = [

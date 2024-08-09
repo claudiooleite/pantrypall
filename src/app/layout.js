@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import Navbar from "@/components/Navbar";
 import { PantryProvider } from "./utilities/PantryContext";
 
 const inter = Inter({ subsets: ["latin"] });
