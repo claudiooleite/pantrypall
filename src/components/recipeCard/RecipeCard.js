@@ -10,6 +10,7 @@ const RecipeCard = ({ id, image, label, mealType, calories }) => {
             src={image}
             alt={label}
             fill
+            priority
             style={{ objectFit: 'cover' }}
             className="rounded-lg"
             sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -53,6 +53,7 @@ const RecipeDetailPage = ({ params }) => {
           src={recipe.image}
           alt={recipe.label}
           fill
+          priority
           style={{ objectFit: "cover" }}
           sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
