@@ -22,8 +22,8 @@ export default function Search() {
 
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
-        <h1 className="text-lg font-semibold">
+      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col justify-center items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+        <h1 className="text-2xl font-extrabold">
           Select Pantry Items for Today's Meal
         </h1>
       </div>
@@ -34,7 +34,7 @@ export default function Search() {
             onClick={() => toggleItem(item.id)}
             className={`m-2 px-4 py-2 border-2 border-neutral-950 rounded-full ${
               activeItems.includes(item.id)
-                ? "bg-green-500 text-white"
+                ? "bg-orange-600 text-black"
                 : "bg-gray-100 text-black"
             }`}>
             {item.name}

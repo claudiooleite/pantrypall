@@ -5,7 +5,7 @@ function IngredientsInfo({ ingredients, onRemove }) {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold my-4">Ingredients</h1>
+      <h1 className="text-xl font-semibold my-4 text-center">Ingredients</h1>
       <ul className="flex flex-wrap gap-4">
         {ingredients.map((ingredient) => (
           <li

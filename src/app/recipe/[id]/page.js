@@ -80,7 +80,7 @@ const RecipeDetailPage = ({ params }) => {
               href={recipe.url} // Use the instructions URL
               target="_blank" // Open in a new tab
               rel="noopener noreferrer" // Security measure for external links
-              className="inline-block my-2 px-4 py-2 bg-orange-300 rounded-md hover:bg-blue-600">
+              className="inline-block my-2 px-4 py-2 bg-orange-300 rounded-md hover:bg-orange-600">
               View Full Instructions
             </a>
           ) : (
@@ -91,10 +91,18 @@ const RecipeDetailPage = ({ params }) => {
             Nutritional Information:
           </h2>
           <ul className="text-sm text-gray-700 mb-4">
-            <li className="border-b-2 border-b-zinc-600">Calories: {calories} kcal</li>
-            <li className="border-b-2 border-b-zinc-600">Protein: {protein || "N/A"} g</li>
-            <li className="border-b-2 border-b-zinc-600">Fat: {fat || "N/A"} g</li>
-            <li className="border-b-2 border-b-zinc-600">Carbs: {carbs || "N/A"} g</li>
+            <li className="border-b-2 border-b-zinc-600">
+              Calories: {calories} kcal
+            </li>
+            <li className="border-b-2 border-b-zinc-600">
+              Protein: {protein || "N/A"} g
+            </li>
+            <li className="border-b-2 border-b-zinc-600">
+              Fat: {fat || "N/A"} g
+            </li>
+            <li className="border-b-2 border-b-zinc-600">
+              Carbs: {carbs || "N/A"} g
+            </li>
           </ul>
         </div>
       </div>

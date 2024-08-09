@@ -15,8 +15,8 @@ function IngredientForm({ onAddIngredient }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-orange-300 w-full h-44 p-4 flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
-      <h1 className="text-lg font-semibold">
+      className="bg-orange-300 w-full h-44 p-4 flex justify-center flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+      <h1 className="text-2xl font-extrabold">
         What do you have in your pantry?
       </h1>
       <div className="relative mt-4 flex items-center">

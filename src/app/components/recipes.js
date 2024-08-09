@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import RecipeCard from "./recipeCard/RecipeCard";
+import { useRouter } from 'next/navigation';
 
 // API credentials
 const KEY = "974f7f2b0bd545bbbd319a94fac1a359";
@@ -10,6 +11,7 @@ const URL = "https://api.edamam.com/api/recipes/v2";
 function Recipes({ pantry }) {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   // Memoize pantry items
   const pantryItems = useMemo(
@@ -37,13 +39,26 @@ function Recipes({ pantry }) {
       setError("Failed to load recipes.");
     }
   };
+  const handleClick = () => {
+    router.push('/pantry'); // Navigates to the /pantry page
+  };
 
   return (
-    <div className="flex-1 pb-20"> {/* Adjust the padding-bottom here */}
-      <h1 className="text-xl font-semibold my-4">Recipes</h1>
+    <div className="flex-1 pb-20">
+      <h1 className="text-xl font-semibold my-4  text-center">Recipes</h1>
       {error && <p className="text-red-500">{error}</p>}
       {recipes.length === 0 && !error ? (
-        <p>No recipes found based on your pantry items.</p>
+        <>
+          <p>No recipes found based on your pantry items.</p>
+          <p>
+            Add them to your pantry
+            <span>
+              <button onClick={handleClick} className="bg-slate-300 rounded-lg p-1 hover:bg-orange-400">
+                here.
+              </button>
+            </span>
+          </p>
+        </>
       ) : (
         <ul className="flex flex-wrap justify-center">
           {recipes.slice(0, 4).map((recipe) => (

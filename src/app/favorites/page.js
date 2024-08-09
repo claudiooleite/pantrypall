@@ -39,8 +39,8 @@ const Favorites = () => {
 
   return (
     <>
-      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
-        <h1 className="text-lg font-semibold mb-4">Select a Diet Label</h1>
+      <div className="bg-orange-300 w-full h-44 p-4 flex flex-col justify-center items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+        <h1 className="text-2xl font-extrabold">Select a Diet Label</h1>
         <div className="flex flex-wrap justify-center mb-4">
           {dietLabels.map((item) => (
             <button
@@ -48,7 +48,7 @@ const Favorites = () => {
               onClick={() => handleSelectLabel(item.value)}
               className={`m-2 px-4 py-2 border-2 border-neutral-950 rounded-full ${
                 selectedLabel === item.value
-                  ? "bg-green-500 text-white"
+                  ? "bg-orange-600 text-black"
                   : "bg-gray-100 text-black"
               }`}>
               {item.name}
@@ -57,7 +57,7 @@ const Favorites = () => {
         </div>
       </div>
       <div className="w-full pb-20">
-        <h2 className="text-lg font-semibold mb-4">Recipes</h2>
+        <h2 className="text-xl font-semibold my-4 text-center">Recipes</h2>
         <div className="flex flex-wrap justify-center">
           {recipes.slice(0, 4).map((recipe, index) => (
             <RecipeCard

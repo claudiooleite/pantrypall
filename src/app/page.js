@@ -47,7 +47,7 @@ export default function Home() {
           Recommended Meals for Today
         </h2>
         <div className="flex flex-wrap justify-center mb-16">
-          {recipes.slice(0, 4).map((recipe, index) => (
+          {recipes.slice(0, 8).map((recipe, index) => (
             <RecipeCard
               key={index}
               image={recipe.recipe.image}
