@@ -18,7 +18,7 @@ const RecipeDetailPage = ({ params }) => {
     if (id) {
       try {
         const response = await axios.get(
-          `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`
+          `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`,
         );
         setRecipe(response.data.recipe);
       } catch (error) {
@@ -54,6 +54,7 @@ const RecipeDetailPage = ({ params }) => {
           alt={recipe.label}
           fill
           style={{ objectFit: "cover" }}
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className="min-h-screen flex flex-col items-center pb-20 p-4 relative -mt-20">
