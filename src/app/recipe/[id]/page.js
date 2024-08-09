@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Image from "next/image";
 
@@ -14,23 +14,23 @@ const RecipeDetailPage = ({ params }) => {
   const [error, setError] = useState(null);
   const { id } = params; // Extracting id from params
 
-  useEffect(() => {
+  const fetchRecipeDetails = useCallback(async () => {
     if (id) {
-      fetchRecipeDetails();
+      try {
+        const response = await axios.get(
+          `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`
+        );
+        setRecipe(response.data.recipe);
+      } catch (error) {
+        console.error("Error fetching recipe details:", error);
+        setError("Failed to load recipe details.");
+      }
     }
   }, [id]);
 
-  const fetchRecipeDetails = async () => {
-    try {
-      const response = await axios.get(
-        `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`,
-      );
-      setRecipe(response.data.recipe);
-    } catch (error) {
-      console.error("Error fetching recipe details:", error);
-      setError("Failed to load recipe details.");
-    }
-  };
+  useEffect(() => {
+    fetchRecipeDetails();
+  }, [fetchRecipeDetails]);
 
   if (error) return <p className="text-red-500">{error}</p>;
   if (!recipe) return <p>Loading...</p>;

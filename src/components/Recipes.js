@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import RecipeCard from "./recipeCard/RecipeCard";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 // API credentials
 const KEY = "974f7f2b0bd545bbbd319a94fac1a359";
@@ -13,52 +13,55 @@ function Recipes({ pantry }) {
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  // Memoize pantry items
+  // Memoize pantry items to avoid unnecessary re-renders
   const pantryItems = useMemo(
     () => pantry.map((item) => item.name).join(" "),
     [pantry],
   );
 
   // Fetch recipes when pantry items change
-  useEffect(() => {
-    if (pantryItems.trim() !== "") {
-      getRecipes();
-    } else {
-      setRecipes([]); // Clear recipes if pantry is empty
-    }
-  }, [pantryItems]);
-
-  const getRecipes = async () => {
+  const getRecipes = useCallback(async () => {
     try {
       const query = encodeURIComponent(pantryItems);
       const urlConcat = `${URL}?type=public&q=${query}&app_id=${APP_ID}&app_key=${KEY}`;
       const response = await axios.get(urlConcat);
       setRecipes(response.data.hits);
+      setError(null); // Clear any previous errors
     } catch (error) {
       console.error("Error fetching recipes:", error);
       setError("Failed to load recipes.");
+      setRecipes([]); // Clear recipes on error
     }
-  };
+  }, [pantryItems]);
+
+  useEffect(() => {
+    if (pantryItems.trim()) {
+      getRecipes();
+    } else {
+      setRecipes([]); // Clear recipes if pantry is empty
+    }
+  }, [pantryItems, getRecipes]);
+
   const handleClick = () => {
-    router.push('/pantry'); // Navigates to the /pantry page
+    router.push("/pantry"); // Navigates to the /pantry page
   };
 
   return (
     <div className="flex-1 pb-20">
-      <h1 className="text-xl font-semibold my-4  text-center">Recipes</h1>
-      {error && <p className="text-red-500">{error}</p>}
+      <h1 className="text-xl font-semibold my-4 text-center">Recipes</h1>
+      {error && <p className="text-red-500 text-center">{error}</p>}
       {recipes.length === 0 && !error ? (
-        <>
+        <div className="text-center">
           <p>No recipes found based on your pantry items.</p>
           <p>
             Add them to your pantry
-            <span>
-              <button onClick={handleClick} className="bg-slate-300 rounded-lg p-1 hover:bg-orange-400">
-                here.
-              </button>
-            </span>
+            <button
+              onClick={handleClick}
+              className="bg-slate-300 rounded-lg p-1 hover:bg-orange-400 ml-2">
+              here.
+            </button>
           </p>
-        </>
+        </div>
       ) : (
         <ul className="flex flex-wrap justify-center">
           {recipes.slice(0, 4).map((recipe) => (
