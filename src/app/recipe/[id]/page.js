@@ -23,7 +23,7 @@ const RecipeDetailPage = ({ params }) => {
   const fetchRecipeDetails = async () => {
     try {
       const response = await axios.get(
-        `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`
+        `${URL}${id}?type=public&app_id=${APP_ID}&app_key=${API_KEY}`,
       );
       setRecipe(response.data.recipe);
     } catch (error) {
@@ -35,11 +35,19 @@ const RecipeDetailPage = ({ params }) => {
   if (error) return <p className="text-red-500">{error}</p>;
   if (!recipe) return <p>Loading...</p>;
 
-  const nutrition = recipe.nutrition || {}; // Ensure nutrition is defined
-  const calories = nutrition.calories ? Math.round(nutrition.calories) : "N/A"; // Handle undefined calories
+  const protein = recipe.totalNutrients.PROCNT?.quantity
+    ? Math.round(recipe.totalNutrients.PROCNT?.quantity)
+    : "N/A";
+  const fat = recipe.totalNutrients.FAT?.quantity
+    ? Math.round(recipe.totalNutrients.FAT?.quantity)
+    : "N/A";
+  const carbs = recipe.totalNutrients.CHOCDF?.quantity
+    ? Math.round(recipe.totalNutrients.CHOCDF?.quantity)
+    : "N/A";
+  const calories = recipe.calories ? Math.round(recipe.calories) : "N/A"; // Handle undefined calories
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4">
+    <div className="min-h-screen flex flex-col items-center pb-20 p-4">
       <div className="relative w-full h-80 border-2 border-neutral-950 rounded-lg overflow-hidden mb-4">
         <Image
           src={recipe.image}
@@ -61,21 +69,24 @@ const RecipeDetailPage = ({ params }) => {
           ))}
         </ul>
         <h2 className="text-xl font-semibold mb-2">Preparation Steps:</h2>
-        <ol className="list-decimal list-inside pl-4 mb-4">
-          {recipe.instructions &&
-            recipe.instructions.split(". ").map((step, index) => (
-              <li key={index} className="text-sm text-gray-700">
-                {step}
-              </li>
-            ))}
-        </ol>
+        {recipe.url ? (
+          <a
+            href={recipe.url} // Use the instructions URL
+            target="_blank" // Open in a new tab
+            rel="noopener noreferrer" // Security measure for external links
+            className="inline-block mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            View Full Instructions
+          </a>
+        ) : (
+          <p>No instructions available.</p>
+        )}
+
         <h2 className="text-xl font-semibold mb-2">Nutritional Information:</h2>
         <ul className="text-sm text-gray-700 mb-4">
           <li>Calories: {calories} kcal</li>
-          <li>Protein: {nutrition.protein || "N/A"} g</li>
-          <li>Fat: {nutrition.fat || "N/A"} g</li>
-          <li>Carbs: {nutrition.carbs || "N/A"} g</li>
-          {/* Add more nutritional details if needed */}
+          <li>Protein: {protein || "N/A"} g</li>
+          <li>Fat: {fat || "N/A"} g</li>
+          <li>Carbs: {carbs || "N/A"} g</li>
         </ul>
       </div>
     </div>
