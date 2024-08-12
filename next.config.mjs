@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["edamam-product-images.s3.amazonaws.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'edamam-product-images.s3.amazonaws.com',
+        pathname: '/**',
+      },
+      // Add more patterns if needed for other domains
+    ],
   },
 };
 
