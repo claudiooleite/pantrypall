@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import Image from "next/image";
 
 // API credentials
 const API_KEY = "974f7f2b0bd545bbbd319a94fac1a359";
@@ -12,7 +11,7 @@ const URL = "https://api.edamam.com/api/recipes/v2/";
 const RecipeDetailPage = ({ params }) => {
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
-  const { id } = params; // Extracting id from params
+  const { id } = params;
 
   const fetchRecipeDetails = useCallback(async () => {
     if (id) {
@@ -44,34 +43,36 @@ const RecipeDetailPage = ({ params }) => {
   const carbs = recipe.totalNutrients.CHOCDF?.quantity
     ? Math.round(recipe.totalNutrients.CHOCDF?.quantity)
     : "N/A";
-  const calories = recipe.calories ? Math.round(recipe.calories) : "N/A"; // Handle undefined calories
+  const calories = recipe.calories ? Math.round(recipe.calories) : "N/A";
 
   return (
     <>
-      <div className="relative w-full h-80 ">
+      <div className="relative w-full max-w-md mx-auto h-80">
         <img
           src={recipe.image}
           alt={recipe.label}
-          fill
-          priority
-          style={{ objectFit: "cover" }}
-          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+          sizes="100vw"
         />
       </div>
-      <div className="min-h-screen flex flex-col items-center pb-20 p-4 relative -mt-20">
-        <h1 className="text-2xl text-center p-1 font-bold bg-orange-300  m-4 border-2 border-neutral-950 rounded-xl ">
+      <div className="min-h-screen flex flex-col items-center pb-20 p-4 relative -mt-20 max-w-md mx-auto">
+        <h1 className="text-2xl text-center p-1 font-bold bg-orange-300 m-4 border-2 border-neutral-950 rounded-xl">
           {recipe.label}
         </h1>
-        <p className="text-lg mb-4 p-1  border-2 border-neutral-950 rounded-xl ">
+        <p className="text-lg mb-4 p-1 border-2 border-neutral-950 rounded-xl">
           Total Time: {recipe.totalTime} minutes
         </p>
-        <div className="w-full max-w-4xl">
+        <div className="w-full max-w-md">
           <h2 className="text-xl font-semibold mb-2">Ingredients:</h2>
           <ul className="list-inside p-4 mb-4 border-2 border-neutral-950 rounded-xl">
             {recipe.ingredientLines.map((ingredient, index) => (
               <li
                 key={index}
-                className="text-sm text-gray-700 pt-1 border-b-2 border-b-zinc-600 ">
+                className="text-sm text-gray-700 pt-1 border-b-2 border-b-zinc-600">
                 {ingredient}
               </li>
             ))}
@@ -79,9 +80,9 @@ const RecipeDetailPage = ({ params }) => {
           <h2 className="text-xl font-semibold mb-2">Preparation Steps:</h2>
           {recipe.url ? (
             <a
-              href={recipe.url} // Use the instructions URL
-              target="_blank" // Open in a new tab
-              rel="noopener noreferrer" // Security measure for external links
+              href={recipe.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block my-2 px-4 py-2 bg-orange-300 rounded-md hover:bg-orange-600">
               View Full Instructions
             </a>
