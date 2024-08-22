@@ -25,6 +25,7 @@ function Recipes({ pantry }) {
       const query = encodeURIComponent(pantryItems);
       const urlConcat = `${URL}?type=public&q=${query}&app_id=${APP_ID}&app_key=${KEY}`;
       const response = await axios.get(urlConcat);
+      console.log(response.data.hits);
       setRecipes(response.data.hits);
       setError(null); // Clear any previous errors
     } catch (error) {

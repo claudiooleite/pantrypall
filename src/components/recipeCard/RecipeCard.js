@@ -7,7 +7,7 @@ const RecipeCard = ({ id, image, label, mealType, calories }) => {
       {console.log(image)}
       <div className="m-2 p-2 rounded-lg w-72 md:w-80 lg:w-96 flex flex-col items-center cursor-pointer">
         <div className="relative w-full h-40 md:h-48 lg:h-56 border-2 border-neutral-950 rounded-lg overflow-hidden">
-          <Image
+          <img
             src={image}
             alt={label}
             fill
