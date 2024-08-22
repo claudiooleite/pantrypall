@@ -49,7 +49,7 @@ const RecipeDetailPage = ({ params }) => {
   return (
     <>
       <div className="relative w-full h-80 ">
-        <Image
+        <img
           src={recipe.image}
           alt={recipe.label}
           fill
