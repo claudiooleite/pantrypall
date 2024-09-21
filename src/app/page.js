@@ -60,7 +60,7 @@ export default function Home() {
           ))}
         </div>
       </div> */}
-      <Form />
+      <FeedbackForm />
     </main>
   );
 }
