@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import RecipeCard from "@/components/recipeCard/RecipeCard";
+import Form from "../components/Form";
 
 // API credentials
 const API_KEY = "974f7f2b0bd545bbbd319a94fac1a359";
@@ -39,7 +40,7 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center pb-20">
-      <div className="bg-orange-300 w-full h-52 p-4 justify-center flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+      {/* <div className="bg-orange-300 w-full h-52 p-4 justify-center flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
         <h1 className="text-2xl font-extrabold">Welcome to Pantry Pall</h1>
       </div>
       <div className="p-4 w-full flex flex-col -m-24 items-center">
@@ -58,7 +59,8 @@ export default function Home() {
             />
           ))}
         </div>
-      </div>
+      </div> */}
+      <Form />
     </main>
   );
 }
