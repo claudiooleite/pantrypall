@@ -1,4 +1,4 @@
-
+"use client";
 
 export function FeedbackForm() {
     const handleFormSubmit = async (event) => {
