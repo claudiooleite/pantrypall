@@ -16,6 +16,7 @@ export function FeedbackForm() {
         <form name="feedback" onSubmit={handleFormSubmit}>
             <input type="hidden" name="form-name" value="feedback" />
             <input name="name" type="text" placeholder="Name" required />
+            <input name="message" type="text" placeholder="message" required />
             <input name="email" type="text" placeholder="Email (optional)" />
             <button type="submit">Submit</button>
         </form>
