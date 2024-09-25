@@ -1,85 +1,72 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useEffect, useState, useMemo, useCallback } from "react";
-import RecipeCard from "./recipeCard/RecipeCard";
-import { useRouter } from "next/navigation";
+import RecipeCard from "@/components/recipeCard/RecipeCard";
 
 // API credentials
-const KEY = "974f7f2b0bd545bbbd319a94fac1a359";
+const API_KEY = "974f7f2b0bd545bbbd319a94fac1a359";
 const APP_ID = "968644ec";
 const URL = "https://api.edamam.com/api/recipes/v2";
 
-function Recipes({ pantry }) {
+// Function to fetch random recipes
+const fetchRandomRecipes = async (query) => {
+  try {
+    const response = await axios.get(
+      `${URL}?type=public&q=${encodeURIComponent(
+        query,
+      )}&app_id=${APP_ID}&app_key=${API_KEY}&random=true`,
+    );
+    return response.data.hits;
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+    return [];
+  }
+};
+
+// Main Home component
+export default function Home() {
   const [recipes, setRecipes] = useState([]);
-  const [error, setError] = useState(null);
-  const router = useRouter();
 
-  // Memoize pantry items to avoid unnecessary re-renders
-  const pantryItems = useMemo(
-    () => pantry.map((item) => item.name).join(" "),
-    [pantry],
-  );
-
-  // Fetch recipes when pantry items change
-  const getRecipes = useCallback(async () => {
-    try {
-      const query = encodeURIComponent(pantryItems);
-      const urlConcat = `${URL}?type=public&q=${query}&app_id=${APP_ID}&app_key=${KEY}`;
-      const response = await axios.get(urlConcat);
-      console.log(response.data.hits);
-      setRecipes(response.data.hits);
-      setError(null); // Clear any previous errors
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-      setError("Failed to load recipes.");
-      setRecipes([]); // Clear recipes on error
-    }
-  }, [pantryItems]);
-
+  // Clear localStorage and fetch new recipes on page load (reload)
   useEffect(() => {
-    if (pantryItems.trim()) {
-      getRecipes();
-    } else {
-      setRecipes([]); // Clear recipes if pantry is empty
+    if (performance.navigation.type === 1) {
+      // Check if page is reloaded
+      localStorage.removeItem("recipes"); // Clear stored recipes on reload
     }
-  }, [pantryItems, getRecipes]);
+    const savedRecipes = localStorage.getItem("recipes");
+    if (savedRecipes) {
+      setRecipes(JSON.parse(savedRecipes)); // Load recipes from localStorage
+    } else {
+      loadRecipes(); // Fetch new recipes if none found
+    }
+  }, []);
 
-  const handleClick = () => {
-    router.push("/pantry"); // Navigates to the /pantry page
+  // Fetch new recipes and store them in localStorage
+  const loadRecipes = async () => {
+    const query = "random";
+    const data = await fetchRandomRecipes(query);
+    setRecipes(data);
+    localStorage.setItem("recipes", JSON.stringify(data)); // Save fetched recipes
   };
 
   return (
-    <div className="flex-1 pb-20">
-      <h1 className="text-xl font-semibold my-4 text-center">Recipes</h1>
-      {error && <p className="text-red-500 text-center">{error}</p>}
-      {recipes.length === 0 && !error ? (
-        <div className="text-center">
-          <p>No recipes found based on your pantry items.</p>
-          <p>
-            Add them to your pantry
-            <button
-              onClick={handleClick}
-              className="bg-slate-300 rounded-lg p-1 hover:bg-orange-400 ml-2">
-              here.
-            </button>
-          </p>
-        </div>
-      ) : (
-        <ul className="flex flex-wrap justify-center">
-          {recipes.slice(0, 4).map((recipe) => (
-            <li key={recipe.recipe.uri} className="m-4">
-              <RecipeCard
-                image={recipe.recipe.image}
-                label={recipe.recipe.label}
-                mealType={recipe.recipe.mealType}
-                calories={Math.round(recipe.recipe.calories)}
-                id={recipe.recipe.uri.split("#")[1]}
-              />
-            </li>
+    <main className="flex min-h-screen flex-col items-center pb-20">
+      <div className="bg-salmon w-full h-52 p-4 justify-center flex flex-col items-center border-b-2 border-b-neutral-950 rounded-b-xl">
+        <h1 className="text-2xl font-extrabold">come to Pantry Pall</h1>
+      </div>
+      <div className="p-4 w-full flex flex-col -m-24 items-center">
+        <div className="flex flex-wrap justify-center mb-16">
+          {recipes.slice(0, 8).map((recipe, index) => (
+            <RecipeCard
+              key={index}
+              image={recipe.recipe.image}
+              label={recipe.recipe.label}
+              mealType={recipe.recipe.mealType}
+              calories={Math.round(recipe.recipe.calories)}
+              id={recipe.recipe.uri.split("#")[1]}
+            />
           ))}
-        </ul>
-      )}
-    </div>
+        </div>
+      </div>
+    </main>
   );
 }
-
-export default Recipes;

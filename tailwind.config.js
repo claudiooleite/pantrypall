@@ -24,7 +24,7 @@ module.exports = {
         text: ["16px", "150%"],
       },
       fontWeight: {
-        extrabold: 800,
+        extrabold: 900,
         bold: 700,
         semibold: 600,
         medium: 500,
