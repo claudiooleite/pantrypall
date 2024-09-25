@@ -1,9 +1,15 @@
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { PantryProvider } from "./utilities/PantryContext";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +26,7 @@ export default function RootLayout({ children }) {
         />
         <title>{metadata.title}</title>
       </head>
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <PantryProvider>{children}</PantryProvider>
         <Navbar />
       </body>

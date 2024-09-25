@@ -1,28 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: #231f20; /* Raisin black */
+  --background: #fff5ed; /* Seashell */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground: rgb(255, 255, 255);
+    --background: rgb(0, 0, 0); /* Use single color for dark mode */
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(254, 236, 217);
 }
 
 @layer utilities {
   .text-balance {
-    text-wrap: balance;
+    text-wrap: balance; /* Note: This property is not widely supported yet */
+  }
+}
+@layer base {
+  h1 {
+    @apply font-semibold text-[24px] leading-[110%];
+  }
+  h2 {
+    @apply font-medium text-[16px] leading-[150%];
+  }
+  .text-regular {
+    @apply font-regular text-[16px] leading-[150%];
   }
 }

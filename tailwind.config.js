@@ -7,10 +7,28 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        "seashell": "#fff5ed",
+        "salmon": "#f58367",
+        "raisin-black": "#231f20",
+        "silver": "#b2b2b2",
+      },
+      fontFamily: {
+        montserrat: ['"Montserrat"', "sans-serif"],
+      },
+      fontSize: {
+        title: ["24px", "110%"],
+        subtitle: ["20px", "110%"],
+        h1: ["24px", "110%"],
+        h2: ["16px", "150%"],
+        text: ["16px", "150%"],
+      },
+      fontWeight: {
+        extrabold: 800,
+        bold: 700,
+        semibold: 600,
+        medium: 500,
+        regular: 400,
       },
     },
   },
